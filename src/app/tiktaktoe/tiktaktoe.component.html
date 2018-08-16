@@ -1,3 +1,23 @@
-<p>
-  tiktaktoe works!
-</p>
+<h1>
+  Tik Tak Toe in Angular by Nguyen Xuan linh
+</h1>
+<table>
+  <tr>
+    <td class="cell" (click)="turnClick($event)" id="0">{{cells[0]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="1">{{cells[1]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="2">{{cells[2]}}</td>
+  </tr>
+  <tr>
+    <td class="cell" (click)="turnClick($event)" id="3">{{cells[3]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="4">{{cells[4]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="5">{{cells[5]}}</td>
+  </tr>
+  <tr>
+    <td class="cell" (click)="turnClick($event)" id="6">{{cells[6]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="7">{{cells[7]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="8">{{cells[8]}}</td>
+  </tr>
+</table>
+
+<div class="end-game" *ngIf="gameOver">&nbsp;</div>
+<button (click)="startGame()">Start Game</button>

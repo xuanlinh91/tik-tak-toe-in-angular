@@ -1,0 +1,50 @@
+h1 {
+  margin-top: 50px;
+  font-family: "Comic Sans MS";
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+}
+
+table {
+  margin: 100px auto;
+}
+
+td {
+  font-family: "Comic Sans MS";
+  font-size: 70px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+table tr:first-child td {
+  border-top: none;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tr td:first-child {
+  border-left: none;
+}
+
+table tr td:last-child {
+  border-right: none;
+}
+
+.end-game {
+  display: none;
+  background-color: bisque;
+  width: 200px;
+  opacity: 0.8;
+  height: 150px;
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  text-align: center;
+  margin-left: -100px;
+}
