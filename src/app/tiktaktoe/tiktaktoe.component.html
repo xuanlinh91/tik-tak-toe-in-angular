@@ -3,21 +3,21 @@
 </h1>
 <table>
   <tr>
-    <td class="cell" (click)="turnClick($event)" id="0">{{cells[0]}}</td>
-    <td class="cell" (click)="turnClick($event)" id="1">{{cells[1]}}</td>
-    <td class="cell" (click)="turnClick($event)" id="2">{{cells[2]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="0">{{displayCells[0]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="1">{{displayCells[1]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="2">{{displayCells[2]}}</td>
   </tr>
   <tr>
-    <td class="cell" (click)="turnClick($event)" id="3">{{cells[3]}}</td>
-    <td class="cell" (click)="turnClick($event)" id="4">{{cells[4]}}</td>
-    <td class="cell" (click)="turnClick($event)" id="5">{{cells[5]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="3">{{displayCells[3]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="4">{{displayCells[4]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="5">{{displayCells[5]}}</td>
   </tr>
   <tr>
-    <td class="cell" (click)="turnClick($event)" id="6">{{cells[6]}}</td>
-    <td class="cell" (click)="turnClick($event)" id="7">{{cells[7]}}</td>
-    <td class="cell" (click)="turnClick($event)" id="8">{{cells[8]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="6">{{displayCells[6]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="7">{{displayCells[7]}}</td>
+    <td class="cell" (click)="turnClick($event)" id="8">{{displayCells[8]}}</td>
   </tr>
 </table>
 
-<div class="end-game" *ngIf="gameOver">&nbsp;</div>
-<button (click)="startGame()">Start Game</button>
+<h1 *ngIf="gameOver">{{message}}</h1>
+<button class="start-btn" (click)="startGame()">Start Game</button>

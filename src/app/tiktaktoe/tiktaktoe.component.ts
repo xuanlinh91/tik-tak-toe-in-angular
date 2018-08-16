@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {forEach} from '../../../node_modules/@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-tiktaktoe',
@@ -9,9 +8,14 @@ import {forEach} from '../../../node_modules/@angular/router/src/utils/collectio
 export class TiktaktoeComponent implements OnInit {
 
   public huPlayer = 'X';
-  public aiPlayer = '0';
+  public aiPlayer = 'O';
   public gameOver = false;
-  public cells = new Array<string>(9);
+  public message = '';
+  public tieMessage = 'Hết chỗ :v';
+  public winMessage = 'You Win!';
+  public loosMessage = 'You loose!';
+  public cells = [];
+  public displayCells = [];
   public winCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -20,46 +24,60 @@ export class TiktaktoeComponent implements OnInit {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
+    [2, 4, 6]
   ];
 
   constructor() {
   }
 
   ngOnInit() {
+    this.startGame();
   }
 
   turnClick(cell) {
-    this.turn(cell, this.huPlayer);
-    this.checkTie();
-    this.turn(this.bestAiTurn(), this.aiPlayer);
+    const id = cell.path[0].id;
+    if (typeof this.cells[id] === 'number') {
+      this.turn(id, this.huPlayer);
+      console.log(this.cells);
+      if (!this.checkTie(this.cells)) {
+        this.turn(this.bestAiTurn(this.cells), this.aiPlayer);
+      } else {
+        this.message = this.tieMessage;
+        this.endGame();
+      }
+    }
   }
 
-  turn(cell, player) {
+  turn(id, player) {
     if (!this.gameOver) {
-      const id = cell.path[0].id;
       this.cells[id] = player;
+      this.displayCells[id] = player;
       const gameWon = this.checkWin(this.cells, player);
+      console.log(gameWon);
       if (gameWon) {
+        console.log(gameWon);
+        this.message = gameWon === this.huPlayer ? this.winMessage : this.loosMessage;
+        // console.log(gameWon.player + ' wins');
         this.endGame();
       }
     }
   }
 
   startGame() {
-    this.cells = [];
+    this.gameOver = false;
+    this.displayCells = [];
+    this.cells = Array.from(Array(9).keys());
   }
 
-  checkWin(board, player) {
+  checkWin(board, player): string {
     const plays = board.reduce((a, e, i) => (e === player) ? a.concat(i) : a, []);
+    let result = '';
+    if (this.winCombos.some(value => ((plays.indexOf(value[0]) > -1) && (plays.indexOf(value[1]) > -1) &&
+      (plays.indexOf(value[2]) > -1)))) {
+      result = player;
+    }
 
-    this.winCombos.forEach(function (value, index) {
-      if ((plays.indexOf(value[0]) > -1) && (plays.indexOf(value[1]) > -1) && (plays.indexOf(value[2]) > -1)) {
-        return {'index': index, 'player': player};
-      }
-
-    });
-
-    return null;
+    return result;
   }
 
   endGame() {
@@ -67,12 +85,19 @@ export class TiktaktoeComponent implements OnInit {
     return false;
   }
 
-  checkTie() {
-
-    return true;
+  checkTie(currBoard) {
+    if (this.emptyCells(currBoard).length < 1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  bestAiTurn() {
-    return 1;
+  bestAiTurn(currBoard) {
+    return this.emptyCells(currBoard)[0];
+  }
+
+  emptyCells(currBoard) {
+    return currBoard.filter(cell => typeof cell === 'number');
   }
 }
