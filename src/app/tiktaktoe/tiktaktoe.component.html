@@ -1,5 +1,5 @@
 <h1>
-  Tik Tak Toe in Angular by Nguyen Xuan linh
+  Tik Tak Toe in Angular by Nguyen Xuan Linh
 </h1>
 <table>
   <tr>
@@ -19,5 +19,7 @@
   </tr>
 </table>
 
-<h1 *ngIf="gameOver">{{message}}</h1>
-<button class="start-btn" (click)="startGame()">Start Game</button>
+<div *ngIf="endgame">
+  <h1>{{message}}<img src="/assets/img/TrollFace.jpg" width="100px"></h1>
+  <button class="start-btn" (click)="startGame()">Replay Game</button>
+</div>
