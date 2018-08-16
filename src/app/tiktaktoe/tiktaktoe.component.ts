@@ -41,7 +41,7 @@ export class TiktaktoeComponent implements OnInit {
 
   turnClick(square) {
     const id = square.path[0].id;
-    if (typeof this.origBoard[id] === 'number') {
+    if (typeof this.origBoard[id] === 'number' && this.endgame === false) {
       this.turn(id, this.huPlayer);
       if (!this.checkWin(this.origBoard, this.huPlayer) && !this.checkTie()) { this.turn(this.bestSpot(), this.aiPlayer); }
     }
